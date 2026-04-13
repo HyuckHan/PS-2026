@@ -9,19 +9,29 @@ void insertion_sort(int *arr, int n) {
 		for(j=0; j<i; j++)
 			if( arr[j] > arr[i] ) break;
 		temp = arr[i];
-		for(k=i; k<j; k--)
+		for(k=i; k>j; k--)
 			arr[k] = arr[k-1];
 		arr[j] = temp;
+
+		/*
+		for(k=i; k>j; k--) {
+			if( arr[k-1] > arr[k] ) {
+				temp = arr[k];
+				arr[k] = arr[k-1];
+				arr[k-1] = temp;
+			}
+			else
+				break;
+		}
+		*/
 	}
 	
 }
 
 void print_array(int *arr, int n){
 	int i;
-	for(i=0; i<n; i++){
-		printf("%d ", arr[i]);
-	}
-	printf("\n");
+	for(i=0; i<n; i++)
+		printf("%d%c", arr[i], i<n-1?' ':'\n');
 }
 
 int main(int argc, char** argv) {

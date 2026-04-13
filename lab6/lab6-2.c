@@ -41,10 +41,8 @@ void merge_sort(int *arr, int p, int r, int *temp_arr) {
 
 void print_array(int *arr, int n){
 	int i;
-	for(i=0; i<n; i++){
-		printf("%d ", arr[i]);
-	}
-	printf("\n");
+	for(i=0; i<n; i++)
+		printf("%d%c", arr[i], i<n-1?' ':'\n');
 }
 
 int main(int argc, char** argv) {
