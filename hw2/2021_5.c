@@ -37,6 +37,8 @@ int main() {
 		scanf("%d", &items[i]);
 
 	pick(items, N, bucket, N-1, N-1);
+	free(items);
+	free(bucket);
 	return 0;
 }
 
