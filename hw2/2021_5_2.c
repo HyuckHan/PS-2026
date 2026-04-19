@@ -11,7 +11,7 @@ int make_number(int *items, int n, int *bucket, int m) {
 }
 
 int pick(int *items, int n, int *bucket, int m, int toPick, int total) {
-	int i, smallest, lastIndex, j, flag, sum;
+	int i, smallest, lastIndex, j, flag, sum, lastSelect;
 
 	if(toPick == 0) {
 		int number = make_number(items, n, bucket, m);
@@ -19,13 +19,16 @@ int pick(int *items, int n, int *bucket, int m, int toPick, int total) {
 		sum = 0;
 		for(i=0; i<m; i++) 
 			sum = sum + items[bucket[i]];
-		//printf("%d %d %d\n", number, (total-sum), (number % (total-sum)==0));
+		printf("%d %d %d\n", number, (total-sum), (number % (total-sum)==0));
 		return (number % (total-sum)==0);
 	}
 
 	lastIndex = m - toPick - 1;
 
 	sum = 0;
+
+	lastSelect = -1;
+
 	for(i=0; i<n; i++) {
 		flag = 0;
 		for(j=0; j<=lastIndex; j++) {
@@ -34,6 +37,11 @@ int pick(int *items, int n, int *bucket, int m, int toPick, int total) {
 		}
 		if(flag == 1)
 			continue;
+
+		if(items[i]==lastSelect)
+			continue;
+
+		lastSelect = items[i];
 		bucket[lastIndex+1] = i;
 		sum = sum + pick(items, n, bucket, m, toPick - 1, total);
 	}
@@ -42,7 +50,7 @@ int pick(int *items, int n, int *bucket, int m, int toPick, int total) {
 }
 
 int main() {
-	int N;
+	int N, i, j, temp;
 	int *items;
 	int *bucket;
 	int total = 0;
@@ -50,9 +58,19 @@ int main() {
 	scanf("%d", &N);
 	items = (int*)malloc(sizeof(int)*N);
 	bucket = (int*)malloc(sizeof(int)*(N-1));
-	for (int i = 0; i < N; i++) {
+	for (i = 0; i < N; i++) {
 		scanf("%d", &items[i]);
 		total = total + items[i];
+	}
+
+	for (i = 0; i < N-1; i++) {
+		for (j = 0; j < N-i-1; j++) {
+			if(items[j]>items[j+1]) {
+				temp = items[j];
+				items[j] = items[j+1];
+				items[j+1] = temp;
+			}
+		}
 	}
 
 	printf("%d\n", pick(items, N, bucket, N-1, N-1, total));
@@ -60,4 +78,3 @@ int main() {
 	free(bucket);
 	return 0;
 }
-
