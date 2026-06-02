@@ -21,22 +21,25 @@ int make_number(int *arr, int n, int *bucket, int m) {
 	return ret;
 }
 
-void pick(int *arr, int n, int *bucket, int m, int toPick) {
-	int i, j, flag, last_index, smallest;
+int pick(int *arr, int n, int *bucket, int m, int toPick) {
+	int i, j, flag, last_index, smallest, ret;
 
 	if(toPick == 0) {
 		int num;
+		int ret;
 		for(i=0; i<m; i++) {
 			printf("%d ", arr[bucket[i]]);
 		}
 
 		num = make_number(arr, n, bucket, m);
-		printf("%d %d\n", num);
-		return;
+		printf("%d %d\n", num, is_prime(num));
+		ret = is_prime(num);
+		return (ret==1)?1:0;
 	}
 
 	last_index = m - toPick - 1;
 
+	ret = 0;
 	for(i=0; i<n; i++) {
 		flag = 0;
 		for(j=0; j<=last_index; j++) {
@@ -48,8 +51,9 @@ void pick(int *arr, int n, int *bucket, int m, int toPick) {
 		if(flag == 1) continue;
 			
 		bucket[last_index+1] = i;
-		pick(arr, n, bucket, m, toPick -1);
+		ret = ret + pick(arr, n, bucket, m, toPick -1);
 	}
+	return ret;
 }
 
 int main() {
@@ -66,7 +70,7 @@ int main() {
 	for(i=0; i<N; i++) 
 		scanf("%d", &arr[i]);
 
-	pick(arr, N, bucket, K, K);
+	printf("%d\n", pick(arr, N, bucket, K, K));
 
 	free(arr);
 	free(bucket);
