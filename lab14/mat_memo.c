@@ -52,8 +52,8 @@ int main() {
 	int i, j, r, c;
 	r = c = 4; // 4x4 matrix
 	m = (int**) malloc( sizeof(int*) * r);
-	M = (int**) malloc( sizeof(int*) * r);
-	M2 = (int**) malloc( sizeof(int*) * r); //계산 유무만 표시
+	M = (int**) malloc( sizeof(int*) * r); //중간 계산 결과 저장
+	M2 = (int**) malloc( sizeof(int*) * r); //계산 여부만 표시
 	for(i = 0; i < r; i++ ){
 		m[i] = (int*) malloc(sizeof(int) * c);
 		M[i] = (int*) malloc(sizeof(int) * c);
@@ -79,8 +79,10 @@ int main() {
 	for(i = 0; i < r; i++ ) {
 		free(m[i]);
 		free(M[i]);
+		free(M2[i]);
 	}
 	free(m);
 	free(M);
+	free(M2);
 	return 0;
 }
