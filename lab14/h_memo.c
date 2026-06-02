@@ -7,16 +7,16 @@ int h_memo2(int n, int *m) {
 	if(m[n] != 0)
 		return m[n];
 
-	if(n == 1 || n == 0) 
+	if(n == 1 || n == 0)
 		return 1;
 
 	ret = 0;
 	for(i=0; i<n; i++) {
 		ret = ret + h_memo2(i, m) * h_memo2(n-i-1, m);
 	}
+
 	m[n] = ret;
 	return ret;
-	
 }
 
 int h_memo1(int n, int *m) {
