@@ -17,7 +17,7 @@ int isLang(int a[], int n) {
 	for(i=0; i<n; i++) {
 		k = a[i];
 
-		if(k<1 || k>n) {
+		if(k<1 || k>n/2) {
 			free(count);
 			free(first);
 			return 0;

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void pick(int *arr, int n, int *bucket, int m, int toPick) {
+void pick(int *arr, int n, int *bucket, int m, int toPick){
 	int i, j, flag, last_index, smallest, sum;
 
 	if(toPick == 0) {
@@ -37,11 +37,12 @@ int main() {
 	bucket = (int*)malloc(sizeof(int)*N/2);
 	arr = (int*)malloc(sizeof(int)*N);
 
-	for(i=0; i<N; i++)
+	for(i=0; i<N; i++) 
 		scanf("%d", &arr[i]);
 
 	pick(arr, N, bucket, N/2, N/2);
 
 	free(bucket);
+	free(arr);
 	return 0;
 }

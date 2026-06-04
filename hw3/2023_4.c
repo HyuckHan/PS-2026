@@ -44,14 +44,9 @@ void quick_sort(char *arr, int p, int r){
 
 int main() {
 	char str[500001];
-
 	scanf("%s", str);
-
 	int len = strlen(str);
-
 	quick_sort(str, 0, len - 1);
-
 	printf("%s\n", str);
-
 	return 0;
 }
