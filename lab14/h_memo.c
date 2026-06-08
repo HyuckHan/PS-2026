@@ -52,5 +52,7 @@ int main() {
 	for(i=0; i<=n; i++)
 		m[i] = 0;
 	printf("%d\n",h_memo2(n,m));
+
+	free(m);
 	return 0;
 }
